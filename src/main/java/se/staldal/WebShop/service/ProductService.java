@@ -21,4 +21,8 @@ public class ProductService {
     public Optional<Product> getProductByName(String name) {
         return productRepository.findByName(name);
     }
+
+    public void create(Product product) {
+        productRepository.save(product);
+    }
 }
