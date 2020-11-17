@@ -25,10 +25,16 @@ public class Order {
     @ManyToOne
     User users;
 
-    @ManyToMany
-    List<Product> products;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    List<OrderItem> items;
 
     public Order() {
+    }
+
+    public Order(double totalPrice, User users, List<OrderItem> items) {
+        this.totalPrice = totalPrice;
+        this.users = users;
+        this.items = items;
     }
 
     public Long getId() {
@@ -45,14 +51,6 @@ public class Order {
 
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
     }
 
     public Status getStatus() {
@@ -77,5 +75,17 @@ public class Order {
 
     public void setUsers(User users) {
         this.users = users;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", orderDate=" + orderDate +
+                ", status=" + status +
+                ", totalPrice=" + totalPrice +
+                ", users=" + users +
+                ", items=" + items +
+                '}';
     }
 }

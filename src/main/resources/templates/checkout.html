@@ -1,0 +1,15 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout Page</title>
+</head>
+<body>
+<div align="center">
+    <h1>Checkout Page</h1>
+    <p th:text="${session.sessionUser}"></p>
+    <p th:text="${session.shoppingCart}"></p>
+    <p><a th:href="@{/checkout/submit}">Submit Order >></a></p>
+</div>
+</body>
+</html>

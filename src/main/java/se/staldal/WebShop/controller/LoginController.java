@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @Controller
-public class UserController {
+public class LoginController {
 
     @Autowired
     UserService userService;
@@ -32,7 +32,7 @@ public class UserController {
                 return "redirect:/admin";
             } else {
                 session.setAttribute("sessionUser", user.get());
-                return "redirect:/products";
+                return "redirect:/home";
             }
         } else {
             model.addAttribute("incorrectUsername", true);

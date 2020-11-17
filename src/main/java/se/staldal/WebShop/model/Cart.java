@@ -1,11 +1,12 @@
 package se.staldal.WebShop.model;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
 
-    private final List<CartItem> items;
+    private final List<OrderItem> items;
     private double total;
 
     public Cart() {
@@ -13,7 +14,46 @@ public class Cart {
         total = 0;
     }
 
-    public List<CartItem> getItems() {
+    public List<OrderItem> getItems() {
         return items;
+    }
+
+    public OrderItem getItem(Product product) {
+        for (OrderItem item : items){
+            if(item.getProduct().getId() == product.getId()){
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public void addItem(Product product) {
+        OrderItem item = new OrderItem(product);
+        items.add(item);
+    }
+
+    public void removeItem(Product product) {
+        OrderItem item = getItem(product);
+        items.remove(item);
+    }
+
+    public double getTotal() {
+        total = 0;
+        for(OrderItem item : items) {
+            total += item.getSubtotal();
+        }
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "items=" + items +
+                ", total=" + total +
+                '}';
     }
 }

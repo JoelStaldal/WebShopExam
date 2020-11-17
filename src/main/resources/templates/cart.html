@@ -1,0 +1,67 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart Page</title>
+</head>
+<body>
+<div align="center">
+    <h1>Cart Page</h1>
+    <p th:text="${session.sessionUser}"></p>
+    <p th:text="${session.shoppingCart}"></p>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${session?.shoppingCart?.items}">
+            <td th:text="${item.product.id}">Product ID</td>
+            <td th:text="${item.product.name}">Name</td>
+            <td th:text="${item.product.price}">Price</td>
+            <td>
+                <form action="#" th:action="@{/cart/update}" method="post">
+                    <input type="hidden" th:value="${item.product.id}" name="id"/>
+                    <input type="number" min="1" th:value="${item.quantity}" name="quantity"/>
+                    <button type="submit">Update</button>
+                </form>
+            </td>
+            <td th:text="${item.subtotal}">Total</td>
+            <td>
+                <form action="#" th:action="@{/cart/remove}" method="post">
+                    <input type="hidden" th:value="${item.product.id}" name="id"/>
+                    <button type="submit">Remove</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Total</th>
+            <th>Checkout</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${session?.shoppingCart?.total}"></td>
+            <td>
+                <form action="#" th:action="@{/checkout}" method="post">
+                    <button type="submit">Checkout</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p><a th:href="@{/home}"><< Home Page</a></p>
+</div>
+</body>
+</html>
