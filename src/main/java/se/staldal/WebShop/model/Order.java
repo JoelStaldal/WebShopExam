@@ -26,7 +26,7 @@ public class Order {
     User users;
 
     @ManyToMany
-    List<Item> items;
+    List<Product> products;
 
     public Order() {
     }
@@ -47,12 +47,12 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    public List<Item> getItems() {
-        return items;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public Status getStatus() {

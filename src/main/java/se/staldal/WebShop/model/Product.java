@@ -3,25 +3,26 @@ package se.staldal.WebShop.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "items")
-public class Item {
+@Table(name = "products")
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private double price;
-    private int quantity = 1;
 
     @JoinColumn(name = "category_id")
     @ManyToOne
     Category category;
 
-    public Item() {
+    public Product() {
     }
 
-    public Item(String name) {
+    public Product(String name, double price, Category category) {
         this.name = name;
+        this.price = price;
+        this.category = category;
     }
 
     public Long getId() {
@@ -46,14 +47,6 @@ public class Item {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public Category getCategory() {
