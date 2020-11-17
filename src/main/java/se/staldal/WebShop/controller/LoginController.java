@@ -58,10 +58,4 @@ public class LoginController {
         }
         return "signup";
     }
-
-    @RequestMapping("/admin")
-    public String showAdminPage() {
-        return "admin";
-    }
-
 }

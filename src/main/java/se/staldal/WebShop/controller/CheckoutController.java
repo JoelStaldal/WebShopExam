@@ -27,7 +27,7 @@ public class CheckoutController {
         User user = (User) session.getAttribute("sessionUser");
         Cart cart = (Cart) session.getAttribute("shoppingCart");
         Order order = new Order(cart.getTotal(), user, cart.getItems());
-        orderService.createOrder(order);
+        orderService.create(order);
         return "checkout";
     }
 
