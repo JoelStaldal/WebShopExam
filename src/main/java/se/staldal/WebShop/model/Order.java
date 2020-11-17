@@ -23,17 +23,17 @@ public class Order {
 
     @JoinColumn(name = "user_id")
     @ManyToOne
-    User users;
+    User user;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    List<OrderItem> items;
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private List<OrderItem> items;
 
     public Order() {
     }
 
-    public Order(double totalPrice, User users, List<OrderItem> items) {
+    public Order(double totalPrice, User user, List<OrderItem> items) {
         this.totalPrice = totalPrice;
-        this.users = users;
+        this.user = user;
         this.items = items;
     }
 
@@ -69,23 +69,19 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    public User getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(User users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", orderDate=" + orderDate +
-                ", status=" + status +
-                ", totalPrice=" + totalPrice +
-                ", users=" + users +
-                ", items=" + items +
-                '}';
+    public List<OrderItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<OrderItem> items) {
+        this.items = items;
     }
 }

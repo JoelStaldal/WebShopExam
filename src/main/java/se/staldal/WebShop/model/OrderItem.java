@@ -1,6 +1,9 @@
 package se.staldal.WebShop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "items")
@@ -8,12 +11,17 @@ public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
     @JoinColumn(name = "product_id")
     @ManyToOne
     private Product product;
     private int quantity;
     private double subtotal;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "items")
+    private List<Order> orders;
 
     public OrderItem() {
     }
@@ -56,13 +64,11 @@ public class OrderItem {
         this.subtotal = subtotal;
     }
 
-    @Override
-    public String toString() {
-        return "OrderItem{" +
-                "id=" + id +
-                ", product=" + product +
-                ", quantity=" + quantity +
-                ", subtotal=" + subtotal +
-                '}';
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

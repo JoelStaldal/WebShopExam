@@ -49,11 +49,4 @@ public class Cart {
         this.total = total;
     }
 
-    @Override
-    public String toString() {
-        return "Cart{" +
-                "items=" + items +
-                ", total=" + total +
-                '}';
-    }
 }

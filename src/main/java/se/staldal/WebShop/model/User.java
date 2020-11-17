@@ -1,6 +1,9 @@
 package se.staldal.WebShop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -8,12 +11,18 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
     @Column(unique = true, nullable = false)
     private String name;
+    @JsonIgnore
     @Enumerated(EnumType.STRING)
     @Column(length = 8, nullable = false)
     private Role role = Role.CUSTOMER;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
+    List<Order> orders;
 
     public User() {
     }
@@ -42,12 +51,12 @@ public class User {
         this.role = role;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", role=" + role +
-                '}';
+    public List<Order> getOrders() {
+        return orders;
     }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
 }
