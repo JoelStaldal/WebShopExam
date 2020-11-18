@@ -29,4 +29,8 @@ public class ProductService {
     public List<Product> getProductsStartsWith(String name) {
         return productRepository.findByNameStartsWith(name);
     }
+
+    public Optional<Product> getById(Long id) {
+        return productRepository.findById(id);
+    }
 }

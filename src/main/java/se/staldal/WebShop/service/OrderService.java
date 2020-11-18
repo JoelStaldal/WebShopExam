@@ -19,7 +19,7 @@ public class OrderService {
         orderRepository.save(order);
     }
 
-    public Optional<Order> get(Long id) {
+    public Optional<Order> getById(Long id) {
         return orderRepository.findById(id);
     }
 
