@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import se.staldal.WebShop.model.Category;
 import se.staldal.WebShop.model.Product;
 import se.staldal.WebShop.service.CategoryService;
 import se.staldal.WebShop.service.ProductService;
@@ -21,12 +22,14 @@ public class HomeController {
     CategoryService categoryService;
 
     @RequestMapping("/home")
-    public String showHomePage() {
+    public String showHomePage(Model model) {
+        List<Category> categories = categoryService.getAll();
+        model.addAttribute("categories", categories);
         return "home";
     }
 
     @RequestMapping("/home/products")
-    public String showHomePage(Model model) {
+    public String showProductPage(Model model) {
         List<Product> products = productService.getAll();
         model.addAttribute("products", products);
         return "home.products";
@@ -37,6 +40,13 @@ public class HomeController {
         List<Product> results = productService.getProductsStartsWith(name);
         model.addAttribute("resultsFromSearch", results);
         return "home.search";
+    }
+
+    @RequestMapping("/home/category")
+    public String showProductsByCategory(@RequestParam("id") Category category, Model model) {
+        List<Product> products = category.getProducts();
+        model.addAttribute("products", products);
+        return "home.category";
     }
 
 }

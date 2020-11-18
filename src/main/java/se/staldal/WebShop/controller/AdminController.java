@@ -14,7 +14,6 @@ import se.staldal.WebShop.service.CategoryService;
 import se.staldal.WebShop.service.OrderService;
 import se.staldal.WebShop.service.ProductService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -58,8 +57,6 @@ public class AdminController {
         Product product = new Product();
         model.addAttribute("product", product);
         List<Category> categories = categoryService.getAll();
-        //List<String> categories = new ArrayList<>();
-        //categories.add("Jeans");
         model.addAttribute("categories", categories);
         return "product.new";
     }
