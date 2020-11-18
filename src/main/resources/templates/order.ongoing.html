@@ -23,6 +23,12 @@
             <td th:text="${order.status}">Price</td>
             <td th:text="${order.totalPrice}">Category</td>
             <td>
+                <form action="#" th:action="@{/order/details}" method="post">
+                    <input type="hidden" th:value="${order.id}" name="id"/>
+                    <button type="submit">Show details</button>
+                </form>
+            </td>
+            <td>
                 <form action="#" th:action="@{/order/update}" method="post">
                     <input type="hidden" th:value="${order.id}" name="id"/>
                     <button type="submit">Mark Completed</button>

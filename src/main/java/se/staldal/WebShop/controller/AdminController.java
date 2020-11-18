@@ -73,4 +73,10 @@ public class AdminController {
         categoryService.create(category);
         return "redirect:/product/new";
     }
+
+    @RequestMapping("/order/details")
+    public String showOrderDetails(@RequestParam("id") Order order, Model model) {
+        model.addAttribute("order", order);
+        return "order.details";
+    }
 }

@@ -1,0 +1,72 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Details</title>
+</head>
+<body>
+<div align="center" th:oject="${order}">
+    <h1>Order Details</h1>
+    <table border="1" cellpadding="3">
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Order Date</th>
+            <th>Status</th>
+            <th>Total Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${order.id}">Order ID</td>
+            <td th:text="${order.orderDate}">Order Date</td>
+            <td th:text="${order.status}">Order Status</td>
+            <td th:text="${order.totalPrice}">Order Total Price</td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <table border="1" cellpadding="3">
+        <thead>
+        <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Role</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${order.user.id}">User ID</td>
+            <td th:text="${order.user.name}">User Name</td>
+            <td th:text="${order.user.role}">User Role</td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <table border="1" cellpadding="3">
+        <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${order.items}">
+            <td th:text="${item.product.id}">Product ID</td>
+            <td th:text="${item.product.name}">Product Name</td>
+            <td th:text="${item.product.price}">Product Price</td>
+            <td th:text="${item.product.category.name}">Category Name</td>
+            <td th:text="${item.quantity}">Quantity</td>
+            <td th:text="${item.subtotal}">Subtotal</td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <p><a th:href="@{/admin}"><< Admin Page</a></p>
+</div>
+</body>
+</html>
