@@ -1,6 +1,5 @@
 package se.staldal.WebShop.model;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,4 +48,8 @@ public class Cart {
         this.total = total;
     }
 
+    public void updateItem(Product product, int quantity) {
+        OrderItem item = getItem(product);
+        item.setQuantity(quantity);
+    }
 }

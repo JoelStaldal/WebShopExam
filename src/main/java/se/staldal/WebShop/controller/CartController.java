@@ -28,4 +28,18 @@ public class CartController {
         cart.addItem(product);
         return "cart";
     }
+
+    @RequestMapping("/update")
+    public String updateQuantity(HttpSession session, @RequestParam("id") Product product, @RequestParam("quantity") int quantity) {
+        Cart cart = cartService.getCart(session);
+        cart.updateItem(product, quantity);
+        return "cart";
+    }
+
+    @RequestMapping("/remove")
+    public String remove(HttpSession session, @RequestParam("id") Product product){
+        Cart cart = cartService.getCart(session);
+        cart.removeItem(product);
+        return "cart";
+    }
 }
