@@ -9,30 +9,11 @@
     <h1>Home Page</h1>
     <p th:text="${session.sessionUser}"></p>
     <p th:text="${session.shoppingCart}"></p>
-    <table border="1" cellpadding="10">
-        <thead>
-        <tr>
-            <th>Product ID</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Category</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="product : ${products}">
-            <td th:text="${product.id}">Product ID</td>
-            <td th:text="${product.name}">Name</td>
-            <td th:text="${product.price}">Price</td>
-            <td th:text="${product.category.name}">Category</td>
-            <td>
-                <form action="#" th:action="@{/cart/add}" method="post">
-                    <input type="hidden" th:value="${product.id}" name="id"/>
-                    <button type="submit">Add to cart</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <p><a th:href="@{/home/products}">Show all products</a></p>
+    <form action="#" th:action="@{/home/search}">
+        <input type="text" name="name" id="search" th:value="${search}"/>
+        <input type="submit" value="Search"/>
+    </form>
 </div>
 </body>
 </html>

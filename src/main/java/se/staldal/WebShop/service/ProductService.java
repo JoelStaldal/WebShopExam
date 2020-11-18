@@ -25,4 +25,8 @@ public class ProductService {
     public void create(Product product) {
         productRepository.save(product);
     }
+
+    public List<Product> getProductsStartsWith(String name) {
+        return productRepository.findByNameStartsWith(name);
+    }
 }
