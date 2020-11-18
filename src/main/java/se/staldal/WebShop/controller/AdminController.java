@@ -66,4 +66,11 @@ public class AdminController {
         productService.create(product);
         return "product.new";
     }
+
+    @RequestMapping("/category/create")
+    public String createCategory(@RequestParam("name") String name) {
+        Category category = new Category(name);
+        categoryService.create(category);
+        return "redirect:/product/new";
+    }
 }
