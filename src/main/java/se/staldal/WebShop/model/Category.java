@@ -12,6 +12,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private Long id;
+    @Column(unique = true, nullable = false)
     private String name;
 
     @JsonIgnore

@@ -6,6 +6,7 @@ import se.staldal.WebShop.Repository.CategoryRepository;
 import se.staldal.WebShop.model.Category;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryService {
@@ -19,5 +20,9 @@ public class CategoryService {
 
     public void create(Category category) {
         categoryRepository.save(category);
+    }
+
+    public Optional<Category> getByName(String name) {
+        return categoryRepository.findByName(name);
     }
 }

@@ -53,7 +53,7 @@
         <tbody>
         <tr>
             <td th:text="${session?.shoppingCart?.total}"></td>
-            <td>
+            <td th:if="${not #lists.isEmpty(session?.shoppingCart?.items)}">
                 <form action="#" th:action="@{/checkout}" method="post">
                     <button type="submit">Checkout</button>
                 </form>

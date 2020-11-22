@@ -1,0 +1,14 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout - Confirm Page</title>
+</head>
+<body>
+<div align="center">
+    <h1>Thank you!</h1>
+    <h1 th:text="${session.sessionUser.name}">Name</h1>
+    <h2>Order created successfully!</h2>
+    <p><a th:href="@{/home}"><< Home</a></p>
+</div>
+</body>

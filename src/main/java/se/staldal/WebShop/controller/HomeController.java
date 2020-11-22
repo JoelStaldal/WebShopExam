@@ -9,7 +9,6 @@ import se.staldal.WebShop.model.Category;
 import se.staldal.WebShop.model.Product;
 import se.staldal.WebShop.service.CategoryService;
 import se.staldal.WebShop.service.ProductService;
-
 import java.util.List;
 
 @Controller
@@ -37,7 +36,7 @@ public class HomeController {
 
     @RequestMapping("/home/search")
     public String searchByName(@RequestParam("name") String name, Model model) {
-        List<Product> results = productService.getProductsStartsWith(name);
+        List<Product> results = productService.getProductsContains(name);
         model.addAttribute("resultsFromSearch", results);
         return "home.search";
     }

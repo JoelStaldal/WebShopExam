@@ -9,7 +9,87 @@
     <h1>Checkout Page</h1>
     <p th:text="${session.sessionUser}"></p>
     <p th:text="${session.shoppingCart}"></p>
-    <p><a th:href="@{/checkout/submit}">Submit Order >></a></p>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${session?.shoppingCart?.items}">
+            <td th:text="${item.product.id}">Product ID</td>
+            <td th:text="${item.product.name}">Name</td>
+            <td th:text="${item.product.price}">Price</td>
+            <td>
+                <form action="#" th:action="@{/cart/update}" method="post">
+                    <input type="hidden" th:value="${item.product.id}" name="id"/>
+                    <input type="number" min="1" th:value="${item.quantity}" name="quantity"/>
+                    <button type="submit">Update</button>
+                </form>
+            </td>
+            <td th:text="${item.subtotal}">Total</td>
+            <td>
+                <form action="#" th:action="@{/cart/remove}" method="post">
+                    <input type="hidden" th:value="${item.product.id}" name="id"/>
+                    <button type="submit">Remove</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <table border="1" cellpadding="10" th:unless="${confirmOrder}">
+        <thead>
+        <tr>
+            <th>Payment type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <div>
+                    <p>Card:<input type="checkbox" name="card"/></p>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <table border="1" cellpadding="10" th:unless="${confirmOrder}">
+        <thead>
+        <tr>
+            <th>Total</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${session?.shoppingCart?.total}"></td>
+            <td>
+                <form action="#" th:action="@{/checkout/submit}" method="post">
+                    <button type="submit">Submit Order</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <div th:if="${confirmOrder}">
+        <p>Are you sure?</p>
+        <form action="#" th:action="@{/checkout/confirm}" method="post">
+            <button type="submit">Confirm</button>
+        </form>
+        <form action="#" th:action="@{/checkout}" method="post">
+            <button type="submit">Cancel</button>
+        </form>
+    </div>
+    <p><a th:href="@{/cart}"><< Cart</a></p>
 </div>
 </body>
 </html>

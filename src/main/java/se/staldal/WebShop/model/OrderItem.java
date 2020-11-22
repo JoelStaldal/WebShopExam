@@ -57,6 +57,7 @@ public class OrderItem {
     }
 
     public double getSubtotal() {
+        subtotal = product.getPrice() * quantity;
         return subtotal;
     }
 

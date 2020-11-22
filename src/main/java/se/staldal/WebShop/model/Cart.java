@@ -2,6 +2,7 @@ package se.staldal.WebShop.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Cart {
 
@@ -17,23 +18,28 @@ public class Cart {
         return items;
     }
 
-    public OrderItem getItem(Product product) {
-        for (OrderItem item : items){
-            if(item.getProduct().getId() == product.getId()){
-                return item;
-            }
-        }
-        return null;
+    public Optional<OrderItem> getItem(Product product) {
+        return items.stream()
+                .filter(i -> i.getProduct().getId() == product.getId())
+                .findFirst();
     }
 
     public void addItem(Product product) {
-        OrderItem item = new OrderItem(product);
-        items.add(item);
+        Optional<OrderItem> item = getItem(product);
+
+        if(item.isPresent()) {
+            int quantity = item.get().getQuantity();
+            item.get().setQuantity(quantity++);
+        } else {
+            items.add(new OrderItem(product));
+        }
     }
 
     public void removeItem(Product product) {
-        OrderItem item = getItem(product);
-        items.remove(item);
+        Optional<OrderItem> item = getItem(product);
+        if(item.isPresent()) {
+            items.remove(item.get());
+        }
     }
 
     public double getTotal() {
@@ -48,8 +54,10 @@ public class Cart {
         this.total = total;
     }
 
-    public void updateItem(Product product, int quantity) {
-        OrderItem item = getItem(product);
-        item.setQuantity(quantity);
+    public void updateItemQuantity(Product product, int quantity) {
+        Optional<OrderItem> item = getItem(product);
+        if(item.isPresent()) {
+            item.get().setQuantity(quantity);
+        }
     }
 }

@@ -1,15 +1,12 @@
-package se.staldal.WebShop.service;
+package se.staldal.WebShop.component;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import se.staldal.WebShop.model.Cart;
-import se.staldal.WebShop.model.Product;
 
 import javax.servlet.http.HttpSession;
 
-@Service
-public class CartService {
+@Component
+public class CartComponent {
 
     public Cart getCart(HttpSession session) {
         Cart cart = (Cart) session.getAttribute("shoppingCart");
@@ -18,7 +15,6 @@ public class CartService {
             cart = new Cart();
             session.setAttribute("shoppingCart", cart);
         }
-
         return cart;
     }
 }

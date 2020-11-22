@@ -13,7 +13,7 @@
         <input type="text" name="name" id="search" th:value="${search}"/>
         <input type="submit" value="Search"/>
     </form>
-    <table border="1" cellpadding="10">
+    <table border="1" cellpadding="10" th:if="${not #lists.isEmpty(resultsFromSearch)}">
         <thead>
         <tr>
             <th>Product ID</th>
@@ -37,6 +37,7 @@
         </tr>
         </tbody>
     </table>
+    <p th:unless="${not #lists.isEmpty(resultsFromSearch)}">No results</p>
     <p><a th:href="@{/home}"><< Home Page</a></p>
 </div>
 </body>

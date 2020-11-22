@@ -9,9 +9,13 @@
     <h1>Home Page</h1>
     <p th:text="${session.sessionUser}"></p>
     <p th:text="${session.shoppingCart}"></p>
-    <p><a th:href="@{/home/products}">Show all products</a></p>
+    <nav>
+        <a th:href="@{/home/products}">Show all products</a>
+        <a th:href="@{/cart}">Show Cart</a>
+    </nav>
+    <br>
     <form action="#" th:action="@{/home/search}">
-        <input type="text" name="name" id="search" th:value="${search}"/>
+        <input type="text" name="name" minlength="3" id="search" th:value="${search}"/>
         <input type="submit" value="Search"/>
     </form>
     <tr th:each="category : ${categories}">
