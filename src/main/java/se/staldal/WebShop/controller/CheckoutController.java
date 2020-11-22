@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import se.staldal.WebShop.model.Cart;
 import se.staldal.WebShop.model.Order;
 import se.staldal.WebShop.model.User;
+import se.staldal.WebShop.service.EmailService;
 import se.staldal.WebShop.service.OrderService;
 
 import javax.servlet.http.HttpSession;
@@ -17,6 +18,9 @@ public class CheckoutController {
 
     @Autowired
     OrderService orderService;
+
+    @Autowired
+    EmailService emailService;
 
     @RequestMapping
     public String showCheckOutPage(HttpSession session) {
@@ -36,6 +40,7 @@ public class CheckoutController {
         if(user != null && cart != null) {
             Order order = new Order(cart.getTotal(), user, cart.getItems());
             orderService.create(order);
+            emailService.sendConfirmationMail(user, order);
             session.removeAttribute("shoppingCart");
         }
         return "checkout.confirm";
