@@ -3,6 +3,9 @@ package se.staldal.WebShop.model;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -14,8 +17,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date orderDate;
+    private Instant orderDate;
     @Enumerated(EnumType.STRING)
     @Column(length = 9, nullable = false)
     private Status status = Status.ONGOING;
@@ -45,11 +47,11 @@ public class Order {
         this.id = id;
     }
 
-    public Date getOrderDate() {
+    public Instant getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(Instant orderDate) {
         this.orderDate = orderDate;
     }
 
