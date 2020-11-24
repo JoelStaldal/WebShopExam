@@ -1,7 +1,4 @@
 package se.staldal.WebShop.model;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
@@ -16,7 +13,7 @@ public class Product {
     private double price;
 
     @JoinColumn(name = "category_id")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     Category category;
 
     public Product() {

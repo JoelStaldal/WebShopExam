@@ -3,11 +3,11 @@ package se.staldal.WebShop.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import se.staldal.WebShop.controller.dto.UserRegistrationDto;
 import se.staldal.WebShop.model.Role;
 import se.staldal.WebShop.model.User;
+import se.staldal.WebShop.service.UserSecurityService;
 import se.staldal.WebShop.service.UserService;
 
 import javax.servlet.http.HttpSession;
@@ -19,16 +19,20 @@ public class LoginController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/login")
+    @Autowired
+    UserSecurityService userSecurityService;
+
+    @GetMapping("/login")
     public String showLoginPage() {
         return "login";
     }
 
-    @RequestMapping("/login/user")
-    public String loginUser(@RequestParam("name") String name, HttpSession session, Model model) {
-        Optional<User> user = userService.getUserByName(name);
+    @PostMapping("/login")
+    public String loginUser(HttpSession session, Model model) {
+        return "home";
+  /*      Optional<User> user = userService.getUserByEmail(email);
         if(user.isPresent()) {
-            if(user.get().getRole().equals(Role.ADMIN)) {
+            if(user.get().getRoles().equals("ROLES_ADMIN")) {
                 return "redirect:/admin";
             } else {
                 session.setAttribute("sessionUser", user.get());
@@ -37,25 +41,30 @@ public class LoginController {
         } else {
             model.addAttribute("incorrectUsername", true);
             return "login";
-        }
+        }*/
     }
 
-    @RequestMapping("/signup")
+    @RequestMapping("/registration")
     public String showUserForm(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        return "signup";
+        UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
+        model.addAttribute("user", userRegistrationDto);
+        return "registration";
     }
 
-    @RequestMapping("/signup/create")
-    public String createUser(@ModelAttribute("user") User user, Model model) {
-        if(userService.userExists(user.getName())) {
+    @PostMapping("/registration/create")
+    public String createUser(@ModelAttribute("user") UserRegistrationDto registrationDto, Model model) {
+        System.out.println(registrationDto);
+        userSecurityService.save(registrationDto);
+        return "redirect:/registration?success";
+
+       /* System.out.println(user);
+        if(userService.userExists(user.getEmail())) {
             model.addAttribute("userExists", true);
         } else {
-            userService.createUser(user);
+            userService.save(new UserRegistrationDto(user.getEmail(), user.getPassword()));
             model.addAttribute("userExists", false);
             model.addAttribute("userCreated", true);
         }
-        return "signup";
+        return "registration";*/
     }
 }

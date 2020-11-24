@@ -10,6 +10,7 @@ import se.staldal.WebShop.model.User;
 import se.staldal.WebShop.service.EmailService;
 import se.staldal.WebShop.service.OrderService;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -34,7 +35,7 @@ public class CheckoutController {
     }
 
     @RequestMapping("/confirm")
-    public String confirmOrder(HttpSession session) {
+    public String confirmOrder(HttpSession session) throws MessagingException {
         User user = (User) session.getAttribute("sessionUser");
         Cart cart = (Cart) session.getAttribute("shoppingCart");
         if(user != null && cart != null) {
