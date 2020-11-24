@@ -9,12 +9,18 @@
     <h1>Login Page</h1>
     <p th:if="${incorrectUsername}">Incorrect Username</p>
     <form action="#" th:action="@{/login}" method="post">
-        <input type="text" class="form-control" id="username" name="username" placeholder="Enter Email">
-        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password"/>
+        <div>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter Email">
+        </div>
+        <br>
+        <div>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password"/>
+        </div>
+        <br>
         <input type="submit" name="login-submit" id="login-submit" class="form-control btn btn-primary" value="Log In"/>
     </form>
     <form action="#" th:action="@{/registration}" method="get">
-        <button type="submit">Sign Up</button>
+        <button type="submit">Register</button>
     </form>
 </div>
 </body>

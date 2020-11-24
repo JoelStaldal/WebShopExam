@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,9 +8,10 @@
 <div align="center">
     <h1>Admin Page</h1>
     <nav>
-        <a th:href="@{/orders/ongoing}">Ongoing orders</a>
-        <a th:href="@{/orders/completed}">Completed orders</a>
-        <a th:href="@{/product/new}">Add new product</a>
+        <a th:href="@{admin/orders/ongoing}">Ongoing orders</a>
+        <a th:href="@{admin/orders/completed}">Completed orders</a>
+        <a th:href="@{admin/product/new}">Add new product</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
     </nav>
 </div>
 </body>

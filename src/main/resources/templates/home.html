@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,6 +12,7 @@
     <nav>
         <a th:href="@{/home/products}">Show all products</a>
         <a th:href="@{/cart}">Show Cart</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
     </nav>
     <br>
     <form action="#" th:action="@{/home/search}">

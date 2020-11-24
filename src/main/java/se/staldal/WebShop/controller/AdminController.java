@@ -17,6 +17,7 @@ import se.staldal.WebShop.service.ProductService;
 import java.util.List;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
@@ -26,7 +27,7 @@ public class AdminController {
     @Autowired
     CategoryService categoryService;
 
-    @RequestMapping("/admin")
+    @RequestMapping
     public String showAdminPage() {
         return "admin";
     }

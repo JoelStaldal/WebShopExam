@@ -1,6 +1,8 @@
 package se.staldal.WebShop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import se.staldal.WebShop.service.ProductService;
 import java.util.List;
 
 @Controller
+@RequestMapping("/home")
 public class HomeController {
 
     @Autowired
@@ -20,28 +23,29 @@ public class HomeController {
     @Autowired
     CategoryService categoryService;
 
-    @RequestMapping("/home")
+    @RequestMapping
     public String showHomePage(Model model) {
         List<Category> categories = categoryService.getAll();
         model.addAttribute("categories", categories);
         return "home";
+
     }
 
-    @RequestMapping("/home/products")
+    @RequestMapping("/products")
     public String showProductPage(Model model) {
         List<Product> products = productService.getAll();
         model.addAttribute("products", products);
         return "home.products";
     }
 
-    @RequestMapping("/home/search")
+    @RequestMapping("/search")
     public String searchByName(@RequestParam("name") String name, Model model) {
         List<Product> results = productService.getProductsContains(name);
         model.addAttribute("resultsFromSearch", results);
         return "home.search";
     }
 
-    @RequestMapping("/home/category")
+    @RequestMapping("/category")
     public String showProductsByCategory(@RequestParam("id") Category category, Model model) {
         List<Product> products = category.getProducts();
         model.addAttribute("products", products);
