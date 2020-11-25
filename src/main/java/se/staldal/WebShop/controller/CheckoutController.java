@@ -38,6 +38,8 @@ public class CheckoutController {
     public String confirmOrder(HttpSession session) throws MessagingException {
         User user = (User) session.getAttribute("sessionUser");
         Cart cart = (Cart) session.getAttribute("shoppingCart");
+        System.out.println(user);
+
         if(user != null && cart != null) {
             Order order = new Order(cart.getTotal(), user, cart.getItems());
             orderService.create(order);

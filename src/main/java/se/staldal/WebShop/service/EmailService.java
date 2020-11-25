@@ -19,10 +19,9 @@ public class EmailService {
     public void sendConfirmationMail(User user, Order order) throws MessagingException {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom("webshop@staldal.se");
-        mailMessage.setTo("customer@user.com"); //user.getMail()
+        mailMessage.setTo(user.getEmail()); //user.getMail()
         mailMessage.setSubject("Order created successfully! #" + order.getId());
-        mailMessage.setText("Hej " + user.getEmail());
+        mailMessage.setText("Thank you! \n\nOrder details...");
         javaMailSender.send(mailMessage);
-
     }
 }

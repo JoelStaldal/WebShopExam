@@ -11,6 +11,8 @@ import se.staldal.WebShop.model.Category;
 import se.staldal.WebShop.model.Product;
 import se.staldal.WebShop.service.CategoryService;
 import se.staldal.WebShop.service.ProductService;
+
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -28,7 +30,6 @@ public class HomeController {
         List<Category> categories = categoryService.getAll();
         model.addAttribute("categories", categories);
         return "home";
-
     }
 
     @RequestMapping("/products")
