@@ -43,8 +43,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/registration/**")
                     .permitAll()
-                    .antMatchers("/home**", "/cart", "/checkout**").hasAnyRole("USER", "ADMIN")
-                    .antMatchers("/admin/**").hasRole("ADMIN")
+                    .antMatchers("/home/**", "/cart/**", "/checkout**").hasAnyRole("USER", "ADMIN")
+                    .antMatchers("/admin/**", "/rest/**").hasRole("ADMIN")
                     .anyRequest()
                     .authenticated()
                     .and()
@@ -54,11 +54,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .permitAll()
                     .and()
                 .logout()
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login?logout")
-                .permitAll();
-
+                    .invalidateHttpSession(true)
+                    .clearAuthentication(true)
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/login?logout")
+                    .permitAll();
     }
 }
