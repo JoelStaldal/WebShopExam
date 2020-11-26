@@ -24,18 +24,12 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String registerAccount(@ModelAttribute("user") UserRegistrationDto registrationDto, Model model) {
-        userService.save(registrationDto);
-        return "redirect:/registration?success";
-
-       /* System.out.println(user);
-        if(userService.userExists(user.getEmail())) {
-            model.addAttribute("userExists", true);
+    public String registerAccount(@ModelAttribute("user") UserRegistrationDto registrationDto) {
+        if(userService.userExists(registrationDto.getEmail())) {
+            return "redirect:/registration?error";
         } else {
-            userService.save(new UserRegistrationDto(user.getEmail(), user.getPassword()));
-            model.addAttribute("userExists", false);
-            model.addAttribute("userCreated", true);
+            userService.save(registrationDto);
+            return "redirect:/registration?success";
         }
-        return "registration";*/
     }
 }

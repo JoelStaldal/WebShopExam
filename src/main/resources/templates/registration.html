@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign Up Page</title>
+    <title>Registration Page</title>
 </head>
 <body>
 <div align="center" vertical-align="middle">
-    <h1>Register Page</h1>
-    <p th:if="${userExists}">User Already Exists</p>
-    <p th:if="${userCreated}">User Created Successfully!</p>
+    <h1>Registration Page</h1>
+    <p th:if="${param.success}">Successfully registered!</p>
+    <p th:if="${param.error}">Account already exists!</p>
     <form action="#" th:action="@{/registration}" th:object="${user}" method="post">
         <div>
-            <input type="text" minlength="2" th:field="*{email}" placeholder="Email"/>
+            <input type="email" minlength="2" th:field="*{email}" placeholder="Email"/>
         </div>
         <br>
         <div>

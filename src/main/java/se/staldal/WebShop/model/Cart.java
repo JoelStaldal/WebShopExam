@@ -29,7 +29,7 @@ public class Cart {
 
         if(item.isPresent()) {
             int quantity = item.get().getQuantity();
-            item.get().setQuantity(quantity++);
+            item.get().setQuantity(++quantity);
         } else {
             items.add(new OrderItem(product));
         }
@@ -48,10 +48,6 @@ public class Cart {
             total += item.getSubtotal();
         }
         return total;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
     }
 
     public void updateItemQuantity(Product product, int quantity) {

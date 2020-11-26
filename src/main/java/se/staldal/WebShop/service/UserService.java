@@ -11,7 +11,6 @@ import se.staldal.WebShop.Repository.UserRepository;
 import se.staldal.WebShop.controller.dto.UserRegistrationDto;
 import se.staldal.WebShop.model.Role;
 import se.staldal.WebShop.model.User;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -30,17 +29,15 @@ public class UserService implements UserSecurityService {
         return userRepository.findByEmail(email);
     }
 
-    public void createUser(User user) {
-        userRepository.save(user);
-    }
-
     public boolean userExists(String email) {
         return userRepository.existsByEmail(email);
     }
 
     @Override
     public User save(UserRegistrationDto userRegistrationDto) {
-        User user = new User(userRegistrationDto.getEmail(), passwordEncoder.encode(userRegistrationDto.getPassword()), Arrays.asList(new Role("ROLE_USER")));
+        User user = new User(userRegistrationDto.getEmail(),
+                passwordEncoder.encode(userRegistrationDto.getPassword()),
+                Arrays.asList(new Role("ROLE_USER")));
         return userRepository.save(user);
     }
 
@@ -48,7 +45,8 @@ public class UserService implements UserSecurityService {
     public UserDetails loadUserByUsername(String username) {
         Optional<User> user = userRepository.findByEmail(username);
         if(user.isPresent()) {
-            return new org.springframework.security.core.userdetails.User(user.get().getEmail(), user.get().getPassword(), mapRolesToAuthorities(user.get().getRoles()));
+            return new org.springframework.security.core.userdetails.User
+                    (user.get().getEmail(), user.get().getPassword(), mapRolesToAuthorities(user.get().getRoles()));
         } else {
             throw new UsernameNotFoundException("Invalid username or password");
         }
