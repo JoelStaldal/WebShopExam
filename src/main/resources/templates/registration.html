@@ -11,7 +11,7 @@
     <p th:if="${param.error}">Account already exists!</p>
     <form action="#" th:action="@{/registration}" th:object="${user}" method="post">
         <div>
-            <input type="email" minlength="2" th:field="*{email}" placeholder="Email"/>
+            <input type="email" minlength="2" th:field="*{email}" autocomplete="off" placeholder="Email"/>
         </div>
         <br>
         <div>

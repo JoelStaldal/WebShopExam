@@ -80,9 +80,10 @@
         </tbody>
     </table>
     <br>
+    <p th:if="${param.error}">Sorry, error creating order</p>
     <div th:if="${confirmOrder}">
         <p>Are you sure?</p>
-        <form action="#" th:action="@{/checkout/confirm}" method="post">
+        <form action="#" th:action="@{/checkout/confirmation}" method="post">
             <button type="submit">Confirm</button>
         </form>
         <form action="#" th:action="@{/checkout}" method="post">

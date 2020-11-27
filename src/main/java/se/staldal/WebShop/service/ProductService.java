@@ -18,16 +18,8 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Optional<Product> getProductByName(String name) {
-        return productRepository.findByName(name);
-    }
-
     public void create(Product product) {
         productRepository.save(product);
-    }
-
-    public List<Product> getProductsStartsWith(String name) {
-        return productRepository.findByNameStartsWith(name);
     }
 
     public List<Product> getProductsContains(String name) {
@@ -36,5 +28,9 @@ public class ProductService {
 
     public Optional<Product> getById(Long id) {
         return productRepository.findById(id);
+    }
+
+    public boolean productExists(String name) {
+        return productRepository.existsByName(name);
     }
 }

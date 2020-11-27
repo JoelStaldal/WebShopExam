@@ -24,7 +24,7 @@ public class CheckoutController {
     EmailService emailService;
 
     @RequestMapping
-    public String showCheckOutPage(HttpSession session) {
+    public String showCheckOutPage() {
         return "checkout";
     }
 
@@ -34,18 +34,20 @@ public class CheckoutController {
         return "checkout";
     }
 
-    @RequestMapping("/confirm")
-    public String confirmOrder(HttpSession session) throws MessagingException {
+    @RequestMapping("/confirmation")
+    public String confirmOrder(HttpSession session, Model model) {
         User user = (User) session.getAttribute("sessionUser");
         Cart cart = (Cart) session.getAttribute("shoppingCart");
-        System.out.println(user);
 
         if(user != null && cart != null) {
             Order order = new Order(cart.getTotal(), user, cart.getItems());
             orderService.create(order);
             emailService.sendConfirmationMail(user, order);
             session.removeAttribute("shoppingCart");
+            model.addAttribute("order", order);
+            return "checkout.confirmation";
+        } else {
+            return "redirect:/checkout/submit?error";
         }
-        return "checkout.confirm";
     }
 }

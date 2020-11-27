@@ -16,7 +16,7 @@
     </nav>
     <br>
     <form action="#" th:action="@{/home/search}">
-        <input type="text" name="name" minlength="3" id="search" th:value="${search}"/>
+        <input type="text" name="name" minlength="3" id="search" autocomplete="off" th:value="${search}"/>
         <input type="submit" value="Search"/>
     </form>
     <tr th:each="category : ${categories}">

@@ -1,8 +1,6 @@
 package se.staldal.WebShop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,8 +9,6 @@ import se.staldal.WebShop.model.Category;
 import se.staldal.WebShop.model.Product;
 import se.staldal.WebShop.service.CategoryService;
 import se.staldal.WebShop.service.ProductService;
-
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller

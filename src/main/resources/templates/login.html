@@ -10,7 +10,7 @@
     <p th:if="${param.error}">Invalid username or password.</p>
     <form action="#" th:action="@{/login}" method="post">
         <div>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Enter Email">
+            <input type="text" class="form-control" id="username" name="username" autocomplete="off" placeholder="Enter Email">
         </div>
         <br>
         <div>

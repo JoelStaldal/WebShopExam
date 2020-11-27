@@ -1,0 +1,58 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout - Confirm Page</title>
+</head>
+<body>
+<div align="center" th:oject="${order}">
+    <h1>Thank you!</h1>
+    <h2>Order created successfully!</h2>
+    <div>
+        <h3>Confirmation mail sent to</h3>
+        <h3 th:text="${session.sessionUser.email}">Email</h3>
+    </div>
+    <table border="1" cellpadding="3">
+        <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${order.items}">
+            <td th:text="${item.product.id}">Product ID</td>
+            <td th:text="${item.product.name}">Product Name</td>
+            <td th:text="${item.product.price}">Product Price</td>
+            <td th:text="${item.product.category.name}">Category Name</td>
+            <td th:text="${item.quantity}">Quantity</td>
+            <td th:text="${item.subtotal}">Subtotal</td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <table border="1" cellpadding="3">
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Order Date</th>
+            <th>Status</th>
+            <th>Total Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${order.id}">Order ID</td>
+            <td th:text="${order.orderDate}">Order Date</td>
+            <td th:text="${order.status}">Order Status</td>
+            <td th:text="${order.totalPrice}">Order Total Price</td>
+        </tr>
+        </tbody>
+    </table>
+    <p><a th:href="@{/home}"><< Home</a></p>
+</div>
+</body>

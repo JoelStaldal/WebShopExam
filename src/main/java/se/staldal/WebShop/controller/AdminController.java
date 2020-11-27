@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
 import se.staldal.WebShop.model.Category;
 import se.staldal.WebShop.model.Order;
 import se.staldal.WebShop.model.Product;
@@ -66,18 +65,26 @@ public class AdminController {
 
     @PostMapping("/product/create")
     public String createProduct(@ModelAttribute("product") Product product) {
-        productService.create(product);
-        return "redirect:/admin/product/new";
+        if(product.getName().trim().length() >= 3 && !productService.productExists(product.getName())) {
+            productService.create(product);
+            return "redirect:/admin/product/new?successProduct";
+        } else {
+            return "redirect:/admin/product/new?errorProduct";
+        }
     }
 
     @PostMapping("/category/create")
     public String createCategory(@RequestParam("name") String name) {
-        Category category = new Category(name);
-        categoryService.create(category);
-        return "redirect:/admin/product/new";
+        if(name.trim().length() >= 3 && !categoryService.categoryExists(name)) {
+            Category category = new Category(name);
+            categoryService.create(category);
+            return "redirect:/admin/product/new/?successCategory";
+        } else {
+            return "redirect:/admin/product/new/?errorCategory";
+        }
     }
 
-    @GetMapping("/order/details")
+    @PostMapping("/order/details")
     public String showOrderDetails(@RequestParam("id") Order order, Model model) {
         model.addAttribute("order", order);
         return "order.details";

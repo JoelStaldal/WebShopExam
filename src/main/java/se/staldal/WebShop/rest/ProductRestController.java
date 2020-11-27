@@ -45,11 +45,22 @@ public class ProductRestController {
         if(optionalCategory.isPresent()) {
             product.setCategory(optionalCategory.get());
         }
-        if(product.getName().trim().length() >= 2 && product.getPrice() >= 1 && product.getCategory().getName().trim().length() >= 2) {
+        if(validProduct(product)) {
             productService.create(product);
             return new ResponseEntity<>("Product created", HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>("Unable to create product", HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
+    public boolean validProduct(Product product) {
+        if(!productService.productExists(product.getName())
+                && (product.getName().trim().length() >= 2
+                && product.getPrice() >= 1
+                && product.getCategory().getName().trim().length() >= 2)) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
