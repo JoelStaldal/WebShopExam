@@ -8,9 +8,10 @@
 <div align="center">
     <h1>Admin Page</h1>
     <nav>
-        <a th:href="@{admin/orders/ongoing}">Ongoing orders</a>
-        <a th:href="@{admin/orders/completed}">Completed orders</a>
-        <a th:href="@{admin/product/new}">Add new product</a>
+        <a th:href="@{/home}">Home</a>
+        <a th:href="@{/admin/orders/ongoing}">Ongoing orders</a>
+        <a th:href="@{/admin/orders/completed}">Completed orders</a>
+        <a th:href="@{/admin/product/new}">Add new product</a>
         <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
     </nav>
 </div>

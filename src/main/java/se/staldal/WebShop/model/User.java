@@ -25,7 +25,7 @@ public class User {
     private List<Role> roles;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     List<Order> orders;
 
     public User() {

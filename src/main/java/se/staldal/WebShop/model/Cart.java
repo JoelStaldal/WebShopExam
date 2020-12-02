@@ -8,10 +8,16 @@ public class Cart {
 
     private final List<OrderItem> items;
     private double total;
+    private String size;
 
     public Cart() {
         items = new ArrayList<>();
         total = 0;
+    }
+
+    public String getSize() {
+        size = String.valueOf(items.size());
+        return size;
     }
 
     public List<OrderItem> getItems() {

@@ -10,10 +10,13 @@
     <p th:text="${session.sessionUser}"></p>
     <p th:text="${session.shoppingCart}"></p>
     <nav>
+        <a th:if="${isAdmin}" th:href="@{/admin}">Admin page</a>
         <a th:href="@{/home/products}">Show all products</a>
         <a th:href="@{/cart}">Show Cart</a>
+        <a th:href="@{/home/account}">Account</a>
         <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
     </nav>
+    <p th:text="${session?.shoppingCart?.size}"></p>
     <br>
     <form action="#" th:action="@{/home/search}">
         <input type="text" name="name" minlength="3" id="search" autocomplete="off" th:value="${search}"/>

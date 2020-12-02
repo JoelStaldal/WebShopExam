@@ -38,4 +38,8 @@ public class OrderService {
     public List<Order> getAllCompleted() {
         return orderRepository.findAllByStatus(Status.COMPLETED);
     }
+
+    public List<Order> getAllByUserId(Long id) {
+        return orderRepository.findAllByUserId(id);
+    }
 }
